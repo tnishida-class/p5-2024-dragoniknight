@@ -8,6 +8,11 @@ function setup(){
 function draw(){
   background(160, 192, 255);
  count = (count + increment) % cycle;
+  if (keyIsPressed) {
+  increment = 2;
+} else {
+ increment = 1;
+  }
   if (count < cycle/2) {
  size = count + 50;
  } else {
