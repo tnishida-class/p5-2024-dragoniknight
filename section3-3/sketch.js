@@ -1,31 +1,36 @@
-// テキスト「キーボード操作に反応する」
-let x, y;
+let x, y, vy;
+const g = 1;
+const vyMax = 20;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
   x = width / 2;
-  y = height / 2;
+  y = windowHeight-125;
+  vy = 2;
 }
 
 function draw(){
-  background(160, 192, 255);
+  background(200);
+  fill(150)
+  strokeWeight(3)
+  rect(0,windowHeight-100,windowWidth,100)
+  fill(50)
   ellipse(x, y, 50);
-  if(keyIsDown(LEFT_ARROW)){ x -= 5; }
-  if(keyIsDown(RIGHT_ARROW)){ x += 5; }
-  if(keyIsDown(UP_ARROW)){ y -= 5; }
-  if(keyIsDown(DOWN_ARROW)){ y += 5; }
-  if(keyIsDown("A".charCodeAt(0))){ x+= 10; }
-  if(keyIsDown(" ".charCodeAt(0))){ x-= 10; }
+  y+= vy;
+  vy+= g*1/100;
+  vy = constrain(vy, vyMax, -vyMax);
+  y = constrain(y, 0, height-125);
+  let i=0
+  if(keyIsDown("A".charCodeAt(0))){ i = 1; }
+  if(keyIsDown(LEFT_ARROW)){ x -= (i+1)*10; }
+  if(keyIsDown(RIGHT_ARROW)){ x += (i+1)*10; }
+}
+function keyPressed(){
+  if(y>=height-125){
+   if(keyIsDown(" ".charCodeAt(0))){ y-= vy*10; vy-= -g*1/100}
+  }
 }
 
-// イベントハンドラを使用するパターン
-// function keyPressed(){
-//   if(keyCode == LEFT_ARROW){ x -= 5; }
-//   else if(keyCode == RIGHT_ARROW){ x+= 5; }
-//   else if(keyCode == DOWN_ARROW){ y += 5; }
-//   else if(keyCode == UP_ARROW){ y -= 5; }
-//   else if(key == "A"){ x += 10; }
-// }
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
