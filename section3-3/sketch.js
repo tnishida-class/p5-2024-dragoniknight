@@ -21,8 +21,8 @@ function draw(){
   fill(100)
   rect(a,b-300,50)
 　fill(255)
-　textSize(30)
-  text("？",a+10,b-265)
+　textSize(40)
+  text("？",a+5,b-260)
   y+= vy;
   vy+= g*1/100;
   vy = constrain(vy, vyMax, -vyMax);
