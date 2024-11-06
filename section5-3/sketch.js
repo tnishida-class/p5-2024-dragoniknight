@@ -1,8 +1,8 @@
 function setup(){
-  createCanvas(2000, 2000);
+  createCanvas(500, 500);
   daysInYear(2003);
   dayOfWeek(2024, 11, 5)
-  calendar(2024,11)
+  calendar(2024,2)
 
   for(let i = 2003; i <= 2024; i++){
     if(isLeapYear(i)){
@@ -19,7 +19,7 @@ function calendar(y, m){
   text(m+"月",210,30)
   for(let b = 0; b < 7; b++){
    for(let c = 0; c < 6; c++){
-    if(1<b<5){
+    if(1<=b && b<=5){
      fill(255)
      rect(50+b*50,50,50,25)
      rect(50+b*50, 75+c*50, 50)
@@ -41,7 +41,7 @@ function calendar(y, m){
   let p = 0
   for(let d = 1; d <= daysInMonth(y, m); d++){
    let dow = dayOfWeek(y, m, d);
-   if(dow == 0){
+   if(dow == 0 && d>=2){
      p = p+1
    }
    fill(0)
@@ -56,12 +56,12 @@ function isLeapYear(y){
 
 function daysInYear(y){
   for(let y = 2003; y <= 2024; y++){
-  　if(isLeapYear(y)){
-    　return 366 
-  　}
-  　else{
-    　return 365
-  　}
+   if(isLeapYear(y)){
+    return 366 
+   }
+   else{
+    return 365
+   }
   }
 }
 
