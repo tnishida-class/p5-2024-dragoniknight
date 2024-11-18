@@ -1,31 +1,50 @@
-// テキスト「キーボード操作に反応する」
-let x, y;
+let x, y, vy,a,b;
+const g = 1;
+const vyMax = 20;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-  x = width / 2;
-  y = height / 2;
+  x = windowWidth / 2;
+  y = windowHeight-75;
+  vy = 2;
+  a = windowWidth;
+  b = windowHeight;
 }
 
 function draw(){
-  background(160, 192, 255);
+  background(150,255,255);
+  fill(220,200,0)
+  strokeWeight(3)
+  rect(0,windowHeight-50,windowWidth,100)
+  fill(255,0,0)
   ellipse(x, y, 50);
-  if(keyIsDown(LEFT_ARROW)){ x -= 5; }
-  if(keyIsDown(RIGHT_ARROW)){ x += 5; }
-  if(keyIsDown(UP_ARROW)){ y -= 5; }
-  if(keyIsDown(DOWN_ARROW)){ y += 5; }
-  if(keyIsDown("A".charCodeAt(0))){ x+= 10; }
-  if(keyIsDown(" ".charCodeAt(0))){ x-= 10; }
+  fill(255)
+  textSize(30)
+  noStroke()
+  text("M",x-13,y+10)
+  fill(255,255,0)
+  stroke(2)
+  rect(a,b-250,50)
+　fill(255)
+　textSize(40)
+  stroke(2)
+  text("？",a+5,b-210)
+  y+= vy;
+  vy+= g*1/100;
+  vy = constrain(vy, vyMax, -vyMax);
+  y = constrain(y, 0, height-75);
+  let i=0
+  if(keyIsDown("A".charCodeAt(0))){ i = 1.5; }
+  if(keyIsDown("Z".charCodeAt(0))){ i = -0.5; }
+  if(keyIsDown(LEFT_ARROW)){ a += (i+1)*10; }
+  if(keyIsDown(RIGHT_ARROW)){ a -= (i+1)*10; }
+}
+function keyPressed(){
+  if(y==height-75){
+   if(keyIsDown(" ".charCodeAt(0))){ y-= vy*10; vy-= -g*1/100}
+  }
 }
 
-// イベントハンドラを使用するパターン
-// function keyPressed(){
-//   if(keyCode == LEFT_ARROW){ x -= 5; }
-//   else if(keyCode == RIGHT_ARROW){ x+= 5; }
-//   else if(keyCode == DOWN_ARROW){ y += 5; }
-//   else if(keyCode == UP_ARROW){ y -= 5; }
-//   else if(key == "A"){ x += 10; }
-// }
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
